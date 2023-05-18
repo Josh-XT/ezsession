@@ -1,13 +1,2 @@
 [build-system]
 requires = ["setuptools", "wheel"]
-
-[project]
-name = "auth_headers"
-version = "0.0.1"
-description = "A small useful Python module to abstract away the common auth header methods used by different software vendors. The output is a requests session with the authentication headers built in."
-authors = [
-    {name = "Josh XT", email = "josh@devxt.com"},
-]
-packages = [
-    { include = "auth_headers", from = "src" },
-]
