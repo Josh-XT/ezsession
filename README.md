@@ -7,13 +7,13 @@ pip install ezsession
 
 ## Auth Types and Required Inputs
 
-1. **oauth** - `client_id`, `client_secret`, `audience`
-2. **oauth_basic** - `username`, `password`
-3. **oauth_password** - `username`, `password`
-4. **basic** - `username`, `password`
+1. **oauth** - `auth_uri`, `client_id`, `client_secret`, `audience`
+2. **oauth_basic** - `auth_uri`, `username`, `password`
+3. **oauth_password** - `auth_uri`, `username`, `password`
+4. **basic** - `username`, `password`, `auth_uri` (optional)
 5. **bearer** - `api_key`
 6. **ApiToken** - `api_key`
-7. **dell** - `client_id`, `client_secret`
+7. **dell** - `auth_uri`, `client_id`, `client_secret`
 
 ## Examples
 Example usage for getting a Datto RMM or Huntress session:
