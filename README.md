@@ -1,5 +1,5 @@
 # Auth Headers
-A small useful Python module to abstract away the common auth header methods used by different software vendors.
+A small useful Python module to abstract away the common auth header methods used by different software vendors.  The output is a requests session with the authentication headers built in.
 
 ## Auth Types and Required Inputs
 
