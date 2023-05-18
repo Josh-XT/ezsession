@@ -89,7 +89,6 @@ def get_session(auth):
         elif auth["type"] == "ApiToken":
             session.headers.update({"Authorization": f"ApiToken {auth['api_key']}"})
         elif auth["type"] == "dell":
-            # Create the base64 encoded string for the Authorization header
             credentials = f"{auth['client_id']}:{auth['client_secret']}".encode()
             basic_auth = base64.b64encode(credentials).decode()
             auth_request = requests.post(
