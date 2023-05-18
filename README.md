@@ -1,4 +1,4 @@
-# Auth Headers
+# Simple Auth
 A small useful Python module to abstract away the common auth header methods used by different software vendors.  The output is a requests session with the authentication headers built in.
 
 ## Auth Types and Required Inputs
@@ -15,6 +15,7 @@ A small useful Python module to abstract away the common auth header methods use
 Example usage for getting a Datto RMM or Huntress session:
 
 ```python
+from simple_auth import get_session
 def datto_rmm_auth(api_key, api_secret):
     auth = {
         "type": "oauth_basic",
