@@ -1,6 +1,10 @@
 # ezsession
 A small useful Python module to abstract away the common auth header methods used by different software vendors.  The output is a requests session with the authentication headers built in.
 
+```
+pip install ezsession
+```
+
 ## Auth Types and Required Inputs
 
 1. **oauth** - `client_id`, `client_secret`, `audience`
