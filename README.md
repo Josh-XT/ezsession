@@ -20,17 +20,17 @@ Example usage for getting a Datto RMM or Huntress session:
 
 ```python
 from ezsession import get_session
-def datto_rmm_auth(api_key, api_secret):
+def datto_rmm_session(api_key, api_secret):
     auth = {
         "type": "oauth_basic",
         "auth_uri": f"{base_uri}/auth/oauth/token",
         "username": api_key,
         "password": api_secret,
-        "server": "concord",
+        "server": "merlot",
     }
     return get_session(auth)
  
-def huntress_auth(api_key, api_secret):
+def huntress_session(api_key, api_secret):
   auth = {
     "type": "basic",
     "username": auth_data["api_key"],
