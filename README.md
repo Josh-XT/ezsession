@@ -16,35 +16,29 @@ pip install ezsession
 7. **dell** - `auth_uri`, `client_id`, `client_secret`
 
 ## Examples
-Example usage for getting a Datto RMM or Huntress session:
+Example usage for getting a Datto RMM session:
 
 ```python
 from ezsession import get_session
-def datto_rmm_session(api_key, api_secret):
+def datto_rmm_session(api_key, api_secret, server):
+    base_uri = f"https://{server}-api.centrastage.net"
     auth = {
         "type": "oauth_basic",
         "auth_uri": f"{base_uri}/auth/oauth/token",
         "username": api_key,
         "password": api_secret,
-        "server": "merlot",
+        "server": server,
     }
-    return get_session(auth)
- 
-def huntress_session(api_key, api_secret):
-  auth = {
-    "type": "basic",
-    "username": auth_data["api_key"],
-    "password": auth_data["api_secret"],
-  }
-  return get_session(auth)
+    return get_session(auth), base_uri
 ```
 
 Example to initialize a Datto RMM session then get account variables.
 
 ```python
-server = "merlot" # Change to your Datto RMM server.
-base_uri = f"https://{server}-api.centrastage.net"
-session = datto_rmm_auth(drmm_user, drmm_pass)
-response = session.get(f"https://{base_uri}/api/v2/account/variables")
+drmm_user = "Your Datto RMM API Key"
+drmm_pass = "Your Datto RMM API Secret"
+drmm_server = "merlot" # Change to your Datto RMM server.
+session, base_uri = datto_rmm_auth(drmm_user, drmm_pass, drmm_server)
+response = session.get(f"{base_uri}/api/v2/account/variables")
 variables = response.json()["variables"]
 ```
