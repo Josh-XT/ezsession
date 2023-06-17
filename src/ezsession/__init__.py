@@ -19,7 +19,7 @@ def get_session(**auth):
         "api_key",
     ]
     if "auth" in auth:
-        auth = auth["auth"]
+        auth.update(**auth["auth"])
     if auth != None:
         if auth["type"] == "oauth":
             body = {
