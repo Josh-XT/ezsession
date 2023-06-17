@@ -1,7 +1,6 @@
 import requests
 import json
 import base64
-import jwt
 from requests.auth import HTTPBasicAuth, HTTPDigestAuth
 
 
@@ -24,11 +23,6 @@ def get_session(**auth):
     if auth != None:
         if auth["type"] == "digest":
             session.auth = HTTPDigestAuth(auth["username"], auth["password"])
-        elif auth["type"] == "bearer_jwt":
-            encoded_jwt = jwt.encode(
-                {"some": "payload"}, auth["secret_key"], algorithm="HS256"
-            )
-            session.headers.update({"Authorization": "Bearer " + encoded_jwt})
         elif auth["type"] == "oauth":
             body = {
                 "client_id": auth["client_id"],

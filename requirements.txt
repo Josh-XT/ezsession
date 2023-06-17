@@ -1,4 +1,3 @@
 requests
 json
 base64
-PyJWT
