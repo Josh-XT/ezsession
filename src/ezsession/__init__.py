@@ -4,10 +4,22 @@ import base64
 from requests.auth import HTTPBasicAuth
 
 
-def get_session(auth):
+def get_session(**auth):
     session = requests.Session()
     session = session
     session.headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    input_keys = [
+        "auth_uri",
+        "client_id",
+        "client_secret",
+        "audience",
+        "username",
+        "password",
+        "type",
+        "api_key",
+    ]
+    if "auth" in auth:
+        auth = auth["auth"]
     if auth != None:
         if auth["type"] == "oauth":
             body = {
@@ -105,4 +117,7 @@ def get_session(auth):
             }
         else:
             session.headers.update(auth)
+    for key in auth:
+        if key not in input_keys:
+            session.headers.update({key: auth[key]})
     return session
