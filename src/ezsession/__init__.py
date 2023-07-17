@@ -118,7 +118,9 @@ def get_session(**auth):
                 "Accept": "application/json",
             }
         else:
-            session.headers.update(auth)
+            # Delete auth type
+            del auth["type"]
+            session.headers.update(**auth)
     for key in auth:
         if key not in input_keys:
             session.headers.update({key: auth[key]})
