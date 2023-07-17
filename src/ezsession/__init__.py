@@ -20,6 +20,7 @@ def get_session(**auth):
     ]
     if "auth" in auth:
         auth.update(**auth["auth"])
+        del auth["auth"]
     if auth != None:
         if auth["type"] == "digest":
             session.auth = HTTPDigestAuth(auth["username"], auth["password"])
