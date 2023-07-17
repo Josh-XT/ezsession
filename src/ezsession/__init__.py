@@ -119,8 +119,9 @@ def get_session(**auth):
             }
         else:
             # Delete auth type
-            del auth["type"]
-            session.headers.update(**auth)
+            if "type" in auth:
+                del auth["type"]
+            session.headers.update({**auth})
     for key in auth:
         if key not in input_keys:
             session.headers.update({key: auth[key]})
