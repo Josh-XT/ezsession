@@ -17,7 +17,9 @@ def get_session(**auth):
         "password",
         "type",
         "api_key",
+        "scope",
     ]
+    print(auth)
     if "auth" in auth:
         auth.update(**auth["auth"])
         del auth["auth"]
@@ -29,13 +31,12 @@ def get_session(**auth):
                 "client_id": auth["client_id"],
                 "client_secret": auth["client_secret"],
                 "audience": auth["audience"],
-                "grant_type": "client_credentials",
+                "grant_type": "client_credentials"
+                if "grant_type" not in auth
+                else auth["grant_type"],
+                "scope": "*" if "scope" not in auth else auth["scope"],
             }
-            if "scope" in auth:
-                body["scope"] = auth["scope"]
-            response = session.post(
-                url=auth["auth_uri"], data=json.dumps(body).encode("utf-8")
-            )
+            response = requests.post(auth["auth_uri"], data=body)
             auth = response.json()
             session.headers = {
                 "Authorization": auth["token_type"] + " " + auth["access_token"],
@@ -126,6 +127,7 @@ def get_session(**auth):
                 del auth["type"]
             session.headers.update({**auth})
     for key in auth:
+        auth[key] = str(auth[key])
         if key not in input_keys:
             session.headers.update({key: auth[key]})
     return session
