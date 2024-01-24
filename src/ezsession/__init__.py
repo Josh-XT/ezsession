@@ -31,6 +31,8 @@ def get_session(**auth):
                 "audience": auth["audience"],
                 "grant_type": "client_credentials",
             }
+            if "scope" in auth:
+                body["scope"] = auth["scope"]
             response = session.post(
                 url=auth["auth_uri"], data=json.dumps(body).encode("utf-8")
             )
