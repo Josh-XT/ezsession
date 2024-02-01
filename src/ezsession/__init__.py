@@ -26,7 +26,7 @@ def get_session(**auth):
     if auth != None:
         if auth["type"] == "digest":
             session.auth = HTTPDigestAuth(auth["username"], auth["password"])
-        elif auth["type"] == "oauth":
+        elif auth["type"] == "oauth" or auth["type"] == "oauth2":
             body = {
                 "client_id": auth["client_id"],
                 "client_secret": auth["client_secret"],

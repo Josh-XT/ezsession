@@ -11,7 +11,7 @@ with open(os.path.join(this_directory, "requirements.txt")) as f:
 
 setup(
     name="ezsession",
-    version="0.0.13",
+    version="0.0.14",
     description="A small useful Python module to abstract away the common auth header methods used by different software vendors. The output is a requests session with the authentication headers built in.",
     long_description=long_description,
     long_description_content_type="text/markdown",
