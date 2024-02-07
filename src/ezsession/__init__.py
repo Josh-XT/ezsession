@@ -31,15 +31,18 @@ def get_session(**auth):
                 "client_id": auth["client_id"],
                 "client_secret": auth["client_secret"],
                 "audience": auth["audience"],
-                "grant_type": "client_credentials"
-                if "grant_type" not in auth
-                else auth["grant_type"],
+                "grant_type": (
+                    "client_credentials"
+                    if "grant_type" not in auth
+                    else auth["grant_type"]
+                ),
                 "scope": "*" if "scope" not in auth else auth["scope"],
             }
             response = requests.post(auth["auth_uri"], data=body)
             auth = response.json()
+            token_type = auth["token_type"] if "token_type" in auth else "Bearer"
             session.headers = {
-                "Authorization": auth["token_type"] + " " + auth["access_token"],
+                "Authorization": token_type + " " + auth["access_token"],
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             }
@@ -57,8 +60,9 @@ def get_session(**auth):
             )
             response.raise_for_status()
             auth = response.json()
+            token_type = auth["token_type"] if "token_type" in auth else "Bearer"
             session.headers = {
-                "Authorization": auth["token_type"] + " " + auth["access_token"],
+                "Authorization": token_type + " " + auth["access_token"],
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             }
@@ -80,8 +84,9 @@ def get_session(**auth):
             response = requests.post(auth["auth_uri"], data=body, headers=headers)
             response.raise_for_status()
             auth = response.json()
+            token_type = auth["token_type"] if "token_type" in auth else "Bearer"
             session.headers = {
-                "Authorization": auth["token_type"] + " " + auth["access_token"],
+                "Authorization": token_type + " " + auth["access_token"],
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 "scope": "*",
@@ -114,10 +119,9 @@ def get_session(**auth):
                 headers={"Authorization": f"Basic {basic_auth}"},
                 data={"grant_type": "client_credentials"},
             ).json()
+            token_type = auth["token_type"] if "token_type" in auth else "Bearer"
             session.headers = {
-                "Authorization": auth_request["token_type"]
-                + " "
-                + auth_request["access_token"],
+                "Authorization": token_type + " " + auth_request["access_token"],
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             }
